@@ -20,7 +20,7 @@ class AddToDoViewController: UIViewController {
 
 
     @IBAction func addTapped(_ sender: Any) {
-        //before conver to database
+        /*before coredata
         let newToDo = ToDo()
         newToDo.priority = prioritySegmentedControl.selectedSegmentIndex
         if let name = reminderField.text {
@@ -29,14 +29,14 @@ class AddToDoViewController: UIViewController {
         toDoTableViewController?.toDos.append(newToDo)
         toDoTableViewController?.tableView.reloadData()
         navigationController?.popViewController(animated: true)
-        
+        */
         
         /*
         To save data, we must have access to the core data stack. We do so via the NSPersistentContainer and NSManagedObjectContext. NSPersistentContainer contains the core data stack and NSManagedObjectContext acts like a doorway to allow users to save/fetch data from the core data stack. AppDelegate.swift contains Core Data related methods and properties pre-defined when we first create our project.
 
             Lim, Greg. Beginning iOS 13 & Swift App Development: Develop iOS Apps with Xcode 11, Swift 5, Core ML, ARKit and more . Kindle Edition.
          */
-       /*
+       
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext    {
             let newToDo = ToDoCD (context: context)
             //notice cast to Int32 cause we created the entity with that type
@@ -49,7 +49,7 @@ class AddToDoViewController: UIViewController {
         }
         
         navigationController?.popViewController(animated: true)
-        */
+        
     }
     
 

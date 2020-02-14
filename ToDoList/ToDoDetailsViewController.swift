@@ -10,16 +10,40 @@ import UIKit
 
 class ToDoDetailsViewController: UIViewController {
 
-    var toDo = ToDo()
+    var toDoCD: ToDoCD? = nil
     
     @IBOutlet weak var reminderLabel: UILabel!
     
     
     @IBAction func doneTap(_ sender: Any) {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            if let toDo = toDoCD {
+                context.delete(toDo)
+            }
+            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        }
+        navigationController?.popViewController(animated: true)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let toDo = toDoCD {
+            if toDo.priority == 1 {
+                if let name = toDo.name {
+                    reminderLabel.text = "❗️" + name
+                }
+            } else if toDo.priority == 2 {
+                if let name = toDo.name {
+                    reminderLabel.text = "‼️" + name }
+            } else {
+                if let name = toDo.name {
+                    reminderLabel.text = name
+                }
+            }
+        }
+
+        
+        /*
         if toDo.priority == 1 {
             reminderLabel.text = "❗️" + toDo.name
             
@@ -29,7 +53,7 @@ class ToDoDetailsViewController: UIViewController {
             reminderLabel.text = toDo.name
             
         }
-
+        */
 
         // Do any additional setup after loading the view.
     }

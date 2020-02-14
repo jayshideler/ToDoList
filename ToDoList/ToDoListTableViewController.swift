@@ -10,13 +10,13 @@ import UIKit
 
 class ToDoListTableViewController: UITableViewController {
     //old code before coredata impl
-    var toDos: [ToDo] = []
-    //var toDoCDs: [ToDoCD] = []
+    //var toDos: [ToDo] = []
+    var toDoCDs: [ToDoCD] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //old code before coredata impl
+        /*before coredata impl
         let toDo1 = ToDo()
         toDo1.name = "Write chapter one of iOS 13 book"
         toDo1.priority = 0
@@ -24,10 +24,10 @@ class ToDoListTableViewController: UITableViewController {
         toDo2.name = "Edit iOS 13 book"
         toDo2.priority = 1
         toDos = [toDo1,toDo2]    // fills up the array
+        */
+
+
         
-
-
-
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,7 +35,12 @@ class ToDoListTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    /*
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getToDos()
+    }
+    
+    /*New for coredata*/
     func getToDos(){
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
             if let toDosFromCoreData = try? context.fetch(ToDoCD.fetchRequest()) {
@@ -46,7 +51,7 @@ class ToDoListTableViewController: UITableViewController {
             }
         }
     }
-    */
+    
     
     // MARK: - Table view data source
 
@@ -57,7 +62,7 @@ class ToDoListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return toDos.count
+        return toDoCDs.count
     }
 
   
@@ -66,6 +71,7 @@ class ToDoListTableViewController: UITableViewController {
 
         // Configure the cell...
         let cell = UITableViewCell()
+        /*before Coredata
         let selectedToDo = toDos[indexPath.row]
         
         if selectedToDo.priority == 1 {
@@ -76,12 +82,41 @@ class ToDoListTableViewController: UITableViewController {
         } else {
             cell.textLabel?.text = selectedToDo.name
         }
+        
+        */
+        
+        let selectedToDo = toDoCDs[indexPath.row]
+        if selectedToDo.priority == 1{
+            if let name = selectedToDo.name{
+                cell.textLabel?.text = "❗️" + name
+                
+            }
+            
+        } else if selectedToDo.priority == 2 {
+            if let name = selectedToDo.name {
+                cell.textLabel?.text = "‼️" + name
+                
+            }
+            
+        } else {
+            if let name = selectedToDo.name {
+                cell.textLabel?.text = name
+                
+            }
+            
+        }
+
         return cell
+        
         
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /*before coredatea
         let selectedToDo = toDos[indexPath.row]
+        */
+        let selectedToDo = toDoCDs[indexPath.row]
+
         performSegue(withIdentifier: "moveToDetails", sender: selectedToDo)
 
     }
@@ -128,7 +163,8 @@ class ToDoListTableViewController: UITableViewController {
         if let addToDoViewController = segue.destination as? AddToDoViewController {      addToDoViewController.toDoTableViewController = self
         }
         if let detailsToDoViewController = segue.destination as? ToDoDetailsViewController {
-            if let selectedToDo = sender as? ToDo{ detailsToDoViewController.toDo = selectedToDo
+            if let selectedToDo = sender as? ToDoCD {
+                detailsToDoViewController.toDoCD = selectedToDo
             }
         }
     }
