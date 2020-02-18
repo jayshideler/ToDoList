@@ -16,15 +16,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="fs4-xn-agk">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="toReuse" id="fM5-fm-GkT" userLabel="toDoTableViewCell">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fs4-xn-agk" id="NIB-WQ-WjU">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fM5-fm-GkT" id="gYz-ox-c59">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Bj2-WD-MgZ" kind="show" identifier="moveToDetails" id="L3p-p2-IQh"/>
+                                    <segue destination="Bj2-WD-MgZ" kind="show" identifier="moveToDetails" id="spJ-VK-lnE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -50,7 +50,7 @@
         <!--To Do Details View Controller-->
         <scene sceneID="NzU-uS-Z2J">
             <objects>
-                <viewController id="Bj2-WD-MgZ" customClass="ToDoDetailsViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toDoDetails" id="Bj2-WD-MgZ" customClass="ToDoDetailsViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nDb-ga-gZ0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,18 +68,28 @@
                                     <action selector="doneTap:" destination="Bj2-WD-MgZ" eventType="touchUpInside" id="V5a-fX-ApT"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rpr-9u-gMc">
+                                <rect key="frame" x="50" y="372" width="275" height="275"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Rpr-9u-gMc" secondAttribute="height" multiplier="1:1" id="R0i-ft-XmF"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="9Pk-dy-cIb" firstAttribute="trailing" secondItem="Rpr-9u-gMc" secondAttribute="trailing" constant="50" id="3C0-ia-oL4"/>
                             <constraint firstItem="GSK-Ot-7HA" firstAttribute="top" secondItem="U0s-BA-IL0" secondAttribute="bottom" constant="66" id="5Mw-M2-cD1"/>
                             <constraint firstItem="U0s-BA-IL0" firstAttribute="top" secondItem="9Pk-dy-cIb" secondAttribute="top" constant="108" id="Z2o-XS-RFS"/>
+                            <constraint firstItem="Rpr-9u-gMc" firstAttribute="top" secondItem="GSK-Ot-7HA" secondAttribute="bottom" constant="80" id="hnZ-Ga-qYj"/>
                             <constraint firstItem="U0s-BA-IL0" firstAttribute="centerX" secondItem="nDb-ga-gZ0" secondAttribute="centerX" id="lht-Ea-VaG"/>
+                            <constraint firstItem="Rpr-9u-gMc" firstAttribute="leading" secondItem="9Pk-dy-cIb" secondAttribute="leading" constant="50" id="mlM-mB-U2d"/>
                             <constraint firstItem="GSK-Ot-7HA" firstAttribute="centerX" secondItem="nDb-ga-gZ0" secondAttribute="centerX" id="qp5-rG-OuA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Pk-dy-cIb"/>
                     </view>
                     <navigationItem key="navigationItem" id="cV1-nk-gba"/>
                     <connections>
+                        <outlet property="imageView" destination="Rpr-9u-gMc" id="C7A-P6-Qww"/>
                         <outlet property="reminderLabel" destination="U0s-BA-IL0" id="geC-40-1cu"/>
                     </connections>
                 </viewController>
@@ -115,38 +125,60 @@
                                 </segments>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8V4-22-XxS" userLabel="addButton">
-                                <rect key="frame" x="172.66666666666666" y="404" width="30" height="30"/>
+                                <rect key="frame" x="172.66666666666666" y="354" width="30" height="30"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
                                     <action selector="addTapped:" destination="Iq9-hg-zlY" eventType="touchUpInside" id="oUb-kW-hCY"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uo3-BR-jzQ">
+                                <rect key="frame" x="50" y="432" width="275" height="275"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="uo3-BR-jzQ" secondAttribute="height" multiplier="1:1" id="Ve2-fR-dtC"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="bfA-mm-EEc" firstAttribute="trailing" secondItem="Sc9-es-3Nh" secondAttribute="trailing" constant="10" id="6hG-mJ-2hX"/>
                             <constraint firstItem="vZa-Oe-Ogr" firstAttribute="top" secondItem="07y-Xe-e37" secondAttribute="bottom" constant="50" id="8BX-iv-baq"/>
+                            <constraint firstItem="uo3-BR-jzQ" firstAttribute="leading" secondItem="bfA-mm-EEc" secondAttribute="leading" constant="50" id="AOa-AD-coq"/>
                             <constraint firstItem="bfA-mm-EEc" firstAttribute="trailing" secondItem="07y-Xe-e37" secondAttribute="trailing" constant="10" id="JDn-1i-rh8"/>
                             <constraint firstItem="vZa-Oe-Ogr" firstAttribute="centerX" secondItem="7M3-p7-9mD" secondAttribute="centerX" id="OBb-nS-F7o"/>
-                            <constraint firstItem="Sc9-es-3Nh" firstAttribute="centerX" secondItem="7M3-p7-9mD" secondAttribute="centerX" id="Ses-pH-Rgd"/>
+                            <constraint firstItem="uo3-BR-jzQ" firstAttribute="top" secondItem="8V4-22-XxS" secondAttribute="bottom" constant="48" id="Vcw-ak-1b1"/>
                             <constraint firstItem="Sc9-es-3Nh" firstAttribute="top" secondItem="vZa-Oe-Ogr" secondAttribute="bottom" constant="40" id="WQL-7z-fAU"/>
                             <constraint firstItem="07y-Xe-e37" firstAttribute="leading" secondItem="bfA-mm-EEc" secondAttribute="leading" constant="10" id="ZZA-ul-c5s"/>
                             <constraint firstItem="8V4-22-XxS" firstAttribute="centerX" secondItem="7M3-p7-9mD" secondAttribute="centerX" id="fhh-vh-IVv"/>
-                            <constraint firstItem="8V4-22-XxS" firstAttribute="top" secondItem="Sc9-es-3Nh" secondAttribute="bottom" constant="100" id="lO1-tM-GC2"/>
+                            <constraint firstItem="8V4-22-XxS" firstAttribute="top" secondItem="Sc9-es-3Nh" secondAttribute="bottom" constant="50" id="lO1-tM-GC2"/>
+                            <constraint firstItem="bfA-mm-EEc" firstAttribute="trailing" secondItem="uo3-BR-jzQ" secondAttribute="trailing" constant="50" id="qPo-XM-wP1"/>
                             <constraint firstItem="Sc9-es-3Nh" firstAttribute="leading" secondItem="bfA-mm-EEc" secondAttribute="leading" constant="10" id="rCb-SM-bbb"/>
                             <constraint firstItem="07y-Xe-e37" firstAttribute="top" secondItem="bfA-mm-EEc" secondAttribute="top" constant="40" id="rTa-Vd-XMk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bfA-mm-EEc"/>
                     </view>
-                    <navigationItem key="navigationItem" id="fGQ-VH-d9I"/>
+                    <navigationItem key="navigationItem" id="fGQ-VH-d9I">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="camera" id="XoP-Ee-m9X">
+                                <connections>
+                                    <action selector="cameraTapped:" destination="Iq9-hg-zlY" id="Cra-rh-Bby"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="organize" id="Czn-vN-0SO">
+                                <connections>
+                                    <action selector="mediaFolderTapped:" destination="Iq9-hg-zlY" id="1Lv-QS-mdZ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
+                        <outlet property="imageView" destination="uo3-BR-jzQ" id="iZg-Hi-QIB"/>
                         <outlet property="prioritySegmentedControl" destination="Sc9-es-3Nh" id="Sch-vp-5Qg"/>
                         <outlet property="reminderField" destination="07y-Xe-e37" id="d9m-5A-Gdl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yun-7S-58Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1831.875" y="42.25352112676056"/>
+            <point key="canvasLocation" x="1831.2" y="42.118226600985224"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hoW-DE-wHl">

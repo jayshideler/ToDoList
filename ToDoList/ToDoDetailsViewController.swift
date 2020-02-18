@@ -14,6 +14,7 @@ class ToDoDetailsViewController: UIViewController {
     
     @IBOutlet weak var reminderLabel: UILabel!
     
+    @IBOutlet weak var imageView: UIImageView!
     
     @IBAction func doneTap(_ sender: Any) {
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
@@ -40,6 +41,10 @@ class ToDoDetailsViewController: UIViewController {
                     reminderLabel.text = name
                 }
             }
+            if let data = toDo.image{
+                imageView?.image = UIImage(data:data)
+            }
+            
         }
 
         

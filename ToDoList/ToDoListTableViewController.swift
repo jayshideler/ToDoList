@@ -105,6 +105,10 @@ class ToDoListTableViewController: UITableViewController {
             }
             
         }
+        
+        if let data = selectedToDo.image{
+            cell.imageView?.image = UIImage(data:data)
+        }
 
         return cell
         
@@ -128,17 +132,25 @@ class ToDoListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+            if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+                    let selectedToDo = toDoCDs[indexPath.row]
+                    context.delete(selectedToDo)
+                    (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+                    getToDos()
+                
+            }
+
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.

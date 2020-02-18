@@ -8,16 +8,36 @@
 
 import UIKit
 
-class AddToDoViewController: UIViewController {
+class AddToDoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var toDoTableViewController: ToDoListTableViewController? = nil
+    var pickerController = UIImagePickerController()
 
     @IBOutlet weak var reminderField: UITextField!
     
 
+    @IBOutlet weak var imageView: UIImageView!
+    
     @IBOutlet weak var prioritySegmentedControl: UISegmentedControl!
     
-
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+                imageView.image = image
+        }
+        pickerController.dismiss(animated: true, completion: nil)
+    }
+    @IBAction func mediaFolderTapped(_ sender: Any) {
+        pickerController.sourceType = .photoLibrary
+        present(pickerController,animated: true,completion: nil)
+    }
+    
+    
+    
+    @IBAction func cameraTapped(_ sender: Any) {
+        pickerController.sourceType = .camera
+        present(pickerController,animated: true,completion: nil)
+    }
+    
 
     @IBAction func addTapped(_ sender: Any) {
         /*before coredata
@@ -44,6 +64,7 @@ class AddToDoViewController: UIViewController {
             if let name = reminderField.text {
                     newToDo.name = name
             }
+            newToDo.image = imageView.image?.jpegData(compressionQuality: 1.0)
             (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
             
         }
@@ -57,7 +78,7 @@ class AddToDoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        pickerController.delegate = self;
         // Do any additional setup after loading the view.
     }
     
